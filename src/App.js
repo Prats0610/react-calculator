@@ -38,7 +38,7 @@ function App(){
     }
     const value = calc.slice(0,-1);
 
-    setCalc(value);
+    setCalc(value)
   }
 
   const allClear =() =>{
