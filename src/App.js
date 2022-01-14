@@ -1,11 +1,15 @@
-import React , {Component} from 'react';
+import React , {useState} from 'react';
 import './App.css';
-import {useState} from 'react';
+
 
 function App(){ 
 
   const[calc, setCalc] = useState("");
   const [result, setResult]= useState("");
+  
+  const calcButtons = [
+    '1','2','3','*','4','5','6','+','7','8','9','-'
+  ]
 
   const operators= ["/", "+", "-", "*", "."];
 
@@ -54,21 +58,23 @@ function App(){
 
      
      <button className='span-two' onClick = {(allClear)}>AC</button>
-     <button className='span-two' onClick={deleteLast}>DEL</button>   
-     <button onClick = {()=>updateCalc("1")}>1</button>
-     <button onClick = {()=>updateCalc("2")}>2</button>
-     <button onClick = {()=>updateCalc("3")}>3</button>
-     <button onClick = {()=>updateCalc("*")}>*</button>
-     <button onClick = {()=>updateCalc("4")}>4</button>
-     <button onClick = {()=>updateCalc("5")}>5</button>
-     <button onClick = {()=>updateCalc("6")}>6</button>
-     <button onClick = {()=>updateCalc("+")}>+</button>
-     <button onClick = {()=>updateCalc("7")}>7</button>
-     <button onClick = {()=>updateCalc("8")}>8</button>
-     <button onClick = {()=>updateCalc("9")}>9</button>
-     <button onClick = {()=>updateCalc("-")}>-</button>
-     <button onClick = {()=>updateCalc(".")}>.</button>
-     <button onClick = {()=>updateCalc("0")}>0</button>
+     <button className='span-two' onClick={deleteLast}>DEL</button> 
+{
+  calcButtons?.map(item =>  <button onClick = {()=>updateCalc(item)}>{item}</button>)}
+//      <button onClick = {()=>updateCalc("1")}>1</button>
+//      <button onClick = {()=>updateCalc("2")}>2</button>
+//      <button onClick = {()=>updateCalc("3")}>3</button>
+//      <button onClick = {()=>updateCalc("*")}>*</button>
+//      <button onClick = {()=>updateCalc("4")}>4</button>
+//      <button onClick = {()=>updateCalc("5")}>5</button>
+//      <button onClick = {()=>updateCalc("6")}>6</button>
+//      <button onClick = {()=>updateCalc("+")}>+</button>
+//      <button onClick = {()=>updateCalc("7")}>7</button>
+//      <button onClick = {()=>updateCalc("8")}>8</button>
+//      <button onClick = {()=>updateCalc("9")}>9</button>
+//      <button onClick = {()=>updateCalc("-")}>-</button>
+//      <button onClick = {()=>updateCalc(".")}>.</button>
+//      <button onClick = {()=>updateCalc("0")}>0</button>
      <button onClick={calculate}>=</button>
      <button onClick = {()=>updateCalc("/")}>/</button>
     </div>
