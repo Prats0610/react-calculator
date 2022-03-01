@@ -14,20 +14,26 @@ body{
   grid-template-columns: repeat(4,6rem);
   grid-template-rows: minmax(7rem,auto) repeat(5,6rem);
 }
-
-.calculator-grid > button {
+.calculator-grid > .finlOutput {
+  grid-column: 1/-1;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(4,6rem);
+  grid-template-rows: minmax(7rem,auto) repeat(5,6rem);
+}
+.calculator-grid > .finlOutput > button {
   cursor: pointer;
   font-size: 2rem;
   border: 1px solid white;
   outline: none;
   background-color: rgba(255, 255, 255, .75);
+  width: auto;
 }
-.calculator-grid > button:hover,
-.calculator-grid > button:focus{
+.calculator-grid > .finlOutput > button:hover,
+.calculator-grid > .finlOutput > button:focus{
   background-color: rgba(255, 255, 255, .9);
 
 }
-
 .span-two{
   grid-column: span 2;
 }

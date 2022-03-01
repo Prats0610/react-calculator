@@ -8,11 +8,12 @@ function App(){
 
   const[calc, setCalc] = useState("");
   const [result, setResult]= useState("");
+  const [toggle, setToggle]= useState(true);
 
   const operators= ["/", "+", "*"];
   const opr = ["-" , "."];
-  const history= new Array();
-  var finhistory='';
+  const [history, setHistory]=useState('');
+  
 
   const updateCalc = value =>{
     if (
@@ -23,7 +24,7 @@ function App(){
       return;
     }
 
-    setCalc(calc + value);  
+    setCalc(calc + value); 
     if (!operators.includes(value)){
       setResult(eval(calc + value).toString())
     }
@@ -52,8 +53,10 @@ function App(){
   const calculate =()=>
   {
     setCalc(eval(calc).toString());
+    if(result!==''){
+      updateHistory(calc + '=' + result);
+    }   
     setResult("");
-    updateHistory(calc + "=" + result)
   }
 
   const deleteLast = ()=>{
@@ -70,17 +73,30 @@ function App(){
     setCalc("");
   }
   const updateHistory=(value)=>{
-     history.push(value);
-     finhistory= history.toString();
-     console.log(finhistory);
+    setHistory(value);
+    console.log(history);
+    setHistory(history + ' ' + value)  
   }
+ const displayHistory=()=>{
+  console.log(toggle);
+   if (toggle===true){
+    document.querySelector('.finlOutput').style.display="none"; 
+    document.querySelector('.output').style.height="592px";
+    }
+   else{
+    document.querySelector('.finlOutput').style.display="grid";
+    document.querySelector('.output').style.height="112px";
+   }
+   setToggle(!toggle);
+ }
 
   return (
   <div className='calculator-grid'>
        <div className='output'>
-           {result ? <span>({result})</span> : ''}<span></span>{ calc || "0"}  
-           <img src={logo} alt="image" className='img'/>          
-        </div>      
+           {result ? <span>({result})</span> : ''}<span></span>{calc || '0'} 
+           <img onClick={displayHistory} src={logo} alt="image" className='img'/>      
+        </div>
+     <div className='finlOutput'>    
      <button className='span-two' onClick = {(allClear)}>AC</button>
      <button className='span-two' onClick={deleteLast}>DEL</button>   
      <button onClick = {()=>updateCalc("1")}>1</button>
@@ -99,6 +115,7 @@ function App(){
      <button onClick = {()=>updateCalc("0")}>0</button>
      <button onClick={calculate}>=</button>
      <button onClick = {()=>updateCalc("/")}>/</button>
+     </div>
 </div>
   );
  }
