@@ -53,6 +53,13 @@ body{
   font-weight: 300;
   color: white;
 }
+.output > .output-value{
+  word-wrap: break-word;
+  word-break: break-all;
+  font-size: 24px;
+  font-weight: 300;
+  color: white;
+}
 .output span{
   font-size:14px;
   color: #888;
@@ -63,11 +70,12 @@ body{
     opacity: 0.3;
     height: 20px;
     width:12.5px;
-    top: -70px;
+    top: -10px;
   left: -342px;
 }
 .img:hover{
   opacity: 0.5;
 }
+
 
 

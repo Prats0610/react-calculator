@@ -12,8 +12,7 @@ function App(){
 
   const operators= ["/", "+", "*"];
   const opr = ["-" , "."];
-  const [history, setHistory]=useState('');
-  
+  const [history, setHistory]= useState([]);
 
   const updateCalc = value =>{
     if (
@@ -24,9 +23,9 @@ function App(){
       return;
     }
 
-    setCalc(calc + value); 
+    setCalc(calc + value);
     if (!operators.includes(value)){
-      setResult(eval(calc + value).toString())
+      setResult(eval(calc + value).toString()) 
     }
   }
 
@@ -52,11 +51,9 @@ function App(){
  
   const calculate =()=>
   {
-    setCalc(eval(calc).toString());
-    if(result!==''){
-      updateHistory(calc + '=' + result);
-    }   
+    setCalc(eval(calc).toString()); 
     setResult("");
+    updateHistory();
   }
 
   const deleteLast = ()=>{
@@ -64,7 +61,6 @@ function App(){
       return;
     }
     const value = calc.slice(0,-1);
-
     setCalc(value)
   }
 
@@ -72,29 +68,32 @@ function App(){
     setResult("");
     setCalc("");
   }
-  const updateHistory=(value)=>{
-    setHistory(value);
-    console.log(history);
-    setHistory(history + ' ' + value)  
+  const updateHistory=()=>{
+    <br></br>
+    if((result!=='')){
+      setHistory(history + "<br />" + calc + '=' + result);
   }
+}
  const displayHistory=()=>{
   console.log(toggle);
    if (toggle===true){
     document.querySelector('.finlOutput').style.display="none"; 
     document.querySelector('.output').style.height="592px";
+    document.querySelector('.output-value').innerHTML=history;
     }
    else{
     document.querySelector('.finlOutput').style.display="grid";
     document.querySelector('.output').style.height="112px";
+    document.querySelector('.output-value').innerHTML=calc;
    }
    setToggle(!toggle);
  }
 
   return (
   <div className='calculator-grid'>
-       <div className='output'>
-           {result ? <span>({result})</span> : ''}<span></span>{calc || '0'} 
-           <img onClick={displayHistory} src={logo} alt="image" className='img'/>      
+       <div className='output'>   
+           <img onClick={displayHistory} src={logo} alt="image" className='img'/>
+           {result ? <span>({result})</span> : ''}<span></span><span className='output-value'>{calc || '0'}</span>     
         </div>
      <div className='finlOutput'>    
      <button className='span-two' onClick = {(allClear)}>AC</button>
@@ -113,7 +112,7 @@ function App(){
      <button onClick = {()=>updateCalcSub("-")}>-</button>
      <button onClick = {()=>updateCalc(".")}>.</button>
      <button onClick = {()=>updateCalc("0")}>0</button>
-     <button onClick={calculate}>=</button>
+     <button onClick={()=>{calculate()}}>=</button>
      <button onClick = {()=>updateCalc("/")}>/</button>
      </div>
 </div>
